@@ -6,12 +6,12 @@ const router = express.Router();
 router.get("/", (req, res) => {
   try {
     res.json({
-      statu: "success",
+      status: "success",
       message: "Here are the user informations",
     });
   } catch (error) {
     res.json({
-      statu: "error",
+      status: "error",
       message: error.message,
     });
   }
@@ -26,11 +26,11 @@ router.post("/", async (req, res) => {
     const user = await insertUser(req.body);
     user?._id
       ? res.json({
-          statu: "success",
+          status: "success",
           message: "New user has been created successfully",
         })
       : res.json({
-          statu: "error",
+          status: "error",
           message: "Unable to craete user, try again later",
         });
   } catch (error) {
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
       msg = "Ther is another user who uses this email in the system";
     }
     res.json({
-      statu: "error",
+      status: "error",
       message: msg,
     });
   }
