@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     user?._id
       ? res.json({
           status: "success",
-          message: "New user has been created successfull",
+          message: "New user has been created successfully",
         })
       : res.json({
           status: "error",
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     let msg = error.message;
 
     if (msg.includes("E11000 duplicate key error")) {
-      msg = "Ther is another user who uses this email in the system";
+      msg = "This is another user who uses this email in the system";
     }
     res.json({
       status: "error",

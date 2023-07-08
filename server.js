@@ -18,20 +18,29 @@ app.use(express.json());
 app.use(cors());
 
 // apis
-import useRouter from "./src/routers/userRouter.js";
+//api for user
+import userRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
-app.use("/api/v1/user", useRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/user", (req, res) => {
+  res.json({
+    status: "Success",
+    message: "Server up and running at user",
+  });
+});
+//api for book/
 app.use("/api/v1/book", bookRouter);
+//api for burrowed books/
+import burrowRouter from "./src/routers/burrowRouter.js";
+app.use("/api/v1/burrow", burrowRouter);
 
 app.use("/", (req, res) => {
   res.json({
-    status: "success",
-    message: "Server running well",
+    status: "Success",
+    message: "Server up and running",
   });
 });
 
 app.listen(PORT, (error) => {
-  error
-    ? console.log(error.message)
-    : console.log(`Server running at http://localhost:${PORT}`);
+  error && console.log(`Server running at http://localhost:${PORT}`);
 });
