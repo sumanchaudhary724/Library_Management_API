@@ -13,34 +13,29 @@ import connectMongoDB from "./src/config/mongoConfig.js";
 connectMongoDB();
 
 //middlewares
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 
 // apis
-//api for user
-import userRouter from "./src/routers/userRouter.js";
+import useRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/user", (req, res) => {
-  res.json({
-    status: "Success",
-    message: "Server up and running at user",
-  });
-});
-//api for book/
-app.use("/api/v1/book", bookRouter);
-//api for burrowed books/
 import burrowRouter from "./src/routers/burrowRouter.js";
-app.use("/api/v1/burrow", burrowRouter);
+import { auth } from "./src/middleware/authMiddleware.js";
+app.use("/api/v1/user", useRouter);
+app.use("/api/v1/book", bookRouter);
+app.use("/api/v1/burrow", auth, burrowRouter);
 
 app.use("/", (req, res) => {
   res.json({
-    status: "Success",
-    message: "Server up and running",
+    status: "success",
+    message: "Server running well",
   });
 });
 
 app.listen(PORT, (error) => {
-  error && console.log(`Server running at http://localhost:${PORT}`);
+  error
+    ? console.log(error.message)
+    : console.log(`Server running at http://localhost:${PORT}`);
 });

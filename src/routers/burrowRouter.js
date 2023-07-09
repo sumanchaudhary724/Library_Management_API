@@ -1,8 +1,12 @@
 import express from "express";
-
-import { addBurrow, getBurrows } from "../models/burrow/BurrowModel.js";
+import {
+  addBurrow,
+  getBurrowbyUserId,
+  getBurrows,
+} from "../models/burrow/BurrowModel.js";
 import { updateBooks } from "../models/book/BookModel.js";
 const router = express.Router();
+
 const twoWeeks = 14;
 router.post("/", async (req, res) => {
   try {
@@ -40,13 +44,18 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
 router.get("/", async (req, res) => {
   try {
-    const burrows = await getBurrows();
+    const { role, _id } = req.userInfo;
+
+    const burrowHistory =
+      role === "admin" ? await getBurrows() : await getBurrowbyUserId(_id);
+
     res.json({
       status: "success",
-      message: "Burrowlist",
-      burrows,
+      message: "burrow list",
+      burrowHistory,
     });
   } catch (error) {
     res.json({
@@ -55,4 +64,5 @@ router.get("/", async (req, res) => {
     });
   }
 });
+
 export default router;

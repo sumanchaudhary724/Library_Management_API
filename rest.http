@@ -5,7 +5,7 @@
 
 @burrowApi = {{rootApi}}/api/v1/burrow
 
-
+@bookApi = {{rootApi}}/api/v1/book
 
 ### server testing
 GET  {{rootApi}}
@@ -29,19 +29,26 @@ Content-Type: application/json
 }
 
 # ============ Book api 
+### fetch all book
+GET {{bookApi}}
+Authorization: 64a2b4eb2e7a640a6fa0820a
+
 
 # ========burrow api
+### fetch
+GET  {{burrowApi}}
+Authorization: 64a9502839d8901cf1488ac4
 
 ### create new burrow record
 
-# POST {{burrowApi}}
-# Content-Type: application/json
+POST {{burrowApi}}
+Content-Type: application/json
 
-# {
-#     "bookId": "skfjsj3432",
-#     "bookName": "Suman Chaudhary",
-#     "thumbnail": "http://...",
-#     "userId": "sdkfjdks4534",
-#     "userName": "how to code",
-#     "returnDate": "2023-12-12"
-# }
+{
+    "bookId": "skfjsj3432",
+    "bookName": "Suman Chaudhary",
+    "thumbnail": "http://...",
+    "userId": "sdkfjdks4534",
+    "userName": "how to code",
+    "returnDate": "2023-12-12"
+}
