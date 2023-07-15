@@ -3,6 +3,7 @@ import {
   addBurrow,
   getBurrowbyUserId,
   getBurrows,
+  updateBurrow,
 } from "../models/burrow/BurrowModel.js";
 import { updateBooks } from "../models/book/BookModel.js";
 const router = express.Router();
@@ -58,6 +59,46 @@ router.get("/", async (req, res) => {
       burrowHistory,
     });
   } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
+
+router.put("/", async (req, res) => {
+  try {
+    const { bookId, burrowId } = req.body;
+
+    // update burrow table
+
+    const updatebrw = await updateBurrow(burrowId, {
+      dueDate: null,
+      isRetured: true,
+      returnDate: Date(),
+    });
+
+    if (updatebrw?._id) {
+      // update book
+      const updtbook = await updateBooks(bookId, {
+        dueDate: null,
+        isAvailable: true,
+      });
+
+      if (updtbook?._id) {
+        return res.json({
+          status: "success",
+          message: "You have returned the book successfully",
+        });
+      }
+    }
+
+    res.json({
+      status: "error",
+      message: "Unable to update the system, please contact administration",
+    });
+  } catch (error) {
+    console.log(error);
     res.json({
       status: "error",
       message: error.message,
