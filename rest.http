@@ -24,8 +24,8 @@ Content-Type: application/json
 
 {
     "role": "admin",
-    "fName": "Sam",
-    "lName": "Smith",
+    "fName": "Suman",
+    "lName": "Chaudhary",
     "phone": "09876",
     "address": "Sydney",
     "email": "suman@gmail.com",
@@ -35,13 +35,13 @@ Content-Type: application/json
 # ============ Book api 
 ### fetch all book
 GET {{bookApi}}
-Authorization: 64a2b4eb2e7a640a6fa0820a
+Authorization: 64b689a74bd63259821e7a2e
 
 
 # ========burrow api
 ### fetch
 GET  {{burrowApi}}
-Authorization: 64a9502839d8901cf1488ac4
+Authorization: 64b68d1a4bd63259821e7a47
 
 ### create new burrow record
 
