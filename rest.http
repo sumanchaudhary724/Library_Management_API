@@ -24,12 +24,12 @@ Content-Type: application/json
 
 {
     "role": "admin",
-    "fName": "Same",
+    "fName": "Sam",
     "lName": "Smith",
     "phone": "09876",
-    "address": "Somewhere in Sydney",
-    "email": "sam@esmail",
-    "password": "12345Mn$6"
+    "address": "Sydney",
+    "email": "suman@gmail.com",
+    "password": "123456"
 }
 
 # ============ Book api 
